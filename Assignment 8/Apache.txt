@@ -1,0 +1,63 @@
+# PB1 | PB13
+# ABHISHEK WAHANE | ATHARVA BARVE
+# B1 Batch
+
+
+---------------- Installation of Apache server on Rasberry pi---------------
+
+
+sudo apt-get install apache2
+
+sudo apt-get install php libapache2-mod-php
+sudo apt-get install git-core
+
+git clone https://github.com/wiringpi/wiringpi
+
+cd wiringpi
+
+./build
+
+
+-------------------------now open terminal and enter this:-------------------
+
+
+$cd /var/www/html
+$sudo nano gpio.php
+
+
+-------------------------this will open a empty black screen window 
+<html>
+<head>
+<meta name="viewport" content="width=device-width" />
+<title>LED Control</title>
+</head>
+        <body>
+        WEB PAGE ON PHP BASED GPIO Control:
+        <form method="get" action="gpio.php">
+                <input type="submit" value="ON" name="on">
+                <input type="submit" value="OFF" name="off">
+        </form>
+        <?php
+        $setmode22 = shell_exec("/usr/local/bin/gpio -g mode 22 out");
+        if(isset($_GET['on'])){
+                $gpio_on = shell_exec("/usr/local/bin/gpio -g write 22 0");
+                echo "LED is on";
+        }
+        else if(isset($_GET['off'])){
+                $gpio_off = shell_exec("/usr/local/bin/gpio -g write 22 1");
+                echo "LED is off";
+        }
+
+        ?>
+        </body>
+</html>
+Note : 22 is GPIO Pin number
+-------------------------------------------------------------------------------------------------------------
+--------now save above file
+--------once go to /var/www/html library and check gpio.php
+
+--------now check ip address of raspberry pi by giving ifconfig on terminal------------
+
+--------enter that ip in your mobile browser as Ip address/gpio.php or on the same machine using localhost/gpio.ph or IP adress/gpio.php
+
+
